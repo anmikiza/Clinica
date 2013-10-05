@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="frmConsultaDoctor">
+            <p:dataTable id="tblConsultaDoctor" selectionMode="single" selection="#{doctoresMB.doctorSelected}"
+                         value="#{doctoresMB.doctorDM}" var="fila">
+
+                <f:facet name="header">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="width: 900px">
+                        <tr>
+                            <td style="width: 100px;">
+                                <h:outputText value="Nombre" />
+                            </td>
+                            <td style="width:300px">
+                                <p:inputText style="width: 280px" />
+                            </td>
+                            <td style="width: 150px;">
+                                <h:outputText value="Especialidad" />
+                            </td>
+                            <td style="width: 350px;">
+                                <p:selectOneMenu style="width: 330px">
+                                    <f:selectItem itemLabel="[Seleccione]" itemValue="0"/>
+                                    <f:selectItem itemLabel="Pediatria" itemValue="1"/>
+                                    <f:selectItem itemLabel="Medicina General" itemValue="2"/>
+                                </p:selectOneMenu>
+                            </td>
+                            <td style="width: 100px">
+                                <p:commandButton value="Consulta" action="#{doctoresMB.consultaDoctores}"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                </f:facet>
+
+                <p:column headerText="DNI">
+                    <h:outputText value="#{fila.dniDoc}"/>
+                </p:column>
+
+                <p:column headerText="NOMBRE">
+                    <h:outputText value="#{fila.nomDoc}"/>
+                </p:column>
+
+                <p:column headerText="SEXO">
+                    <h:outputText value="#{fila.sexDoc}"/>
+                </p:column>
+
+                <p:column headerText="ESPECIALIDAD">
+                    <h:outputText value="#{fila.nomEspe}"/>
+                </p:column>
+
+                <p:column headerText="ACCION">
+
+                    <p:commandButton icon="ui-icon-pencil" 
+                                     title="Editar Doctor" 
+                                     styleClass="ui-boton-tabla"
+                                     action="#{doctoresMB.preEditarDoctor}"/>
+
+                    <p:commandButton icon="ui-icon-trash" 
+                                     title="Eliminar Doctor" 
+                                     styleClass="ui-boton-tabla"/>
+
+
+                </p:column>
+
+            </p:dataTable>
+
+            <p:dialog id="dlgEditaDoctor" header="Editar Doctor" 
+                      widgetVar="dlgEditaDoctor" showEffect="slide" hideEffect="fold">
+
+                <table>
+                    <tr>
+                        <td>
+                            <p:inputText/>
+                        </td>
+
+                        <td>
+                            <p:inputText/>
+                        </td>                       
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h:outputText value="Codigo"/>
+                        </td>
+
+                        <td>
+                            <h:outputText value="Dni"/>
+                        </td>                        
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <p:selectOneRadio>
+                                <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="Femenino"/>
+                            </p:selectOneRadio>
+                        </td>                       
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="Sexo"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">                            
+                            <p:selectOneMenu style="width: 330px">
+                                <f:selectItem itemLabel="[Seleccione]" itemValue="0"/>
+                                <f:selectItem itemLabel="Pediatria" itemValue="1"/>
+                                <f:selectItem itemLabel="Medicina General" itemValue="2"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr> 
+
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="Especialidad"/>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </p:dialog>
+
+        </h:form>
+    </h:body>
+</html>
+
